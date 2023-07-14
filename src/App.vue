@@ -220,6 +220,7 @@ export default defineComponent({
 
 <template>
 	<main>
+		<h1>Turn: {{ turn.toUpperCase() }}</h1>
 		<section class="board">
 			<template v-for="info, id of boardIDs">
 				<HexItem 
