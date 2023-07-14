@@ -85,7 +85,7 @@ export default defineComponent({
 	place-items: center;
 	width: 49px;
 	height: 80px;
-	color: #ff00005d;
+	color: #00ff11aa;
 	background-color: currentColor;
 }
 .smallHexagon:before {
