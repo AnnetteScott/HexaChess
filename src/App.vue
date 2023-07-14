@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import HexItem from './components/HexItem.vue';
 import { pattern as pawnPattern } from '@/pawn';
 import { pattern as rookPattern } from '@/rook';
+import { pattern as knightPattern } from '@/knight';
 import { alphabet, type CellIDs, type Piece, type BoardPiece } from '@/data';
 
 export default defineComponent({
@@ -168,6 +169,9 @@ export default defineComponent({
 			}
 			else if(this.type === 'rook'){
 				this.availableCells = rookPattern(this.colour, this.pieceID, this.pieces)
+			}
+			else if(this.type === 'knight'){
+				this.availableCells = knightPattern(this.colour, this.pieceID, this.pieces)
 			}
 		},
 		selected(id: CellIDs){
