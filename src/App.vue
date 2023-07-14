@@ -5,6 +5,7 @@ import { pattern as pawnPattern } from '@/pawn';
 import { pattern as rookPattern } from '@/rook';
 import { pattern as knightPattern } from '@/knight';
 import { pattern as bishopPattern } from '@/bishop';
+import { pattern as queenPattern } from '@/queen';
 import { alphabet, type CellIDs, type Piece, type BoardPiece } from '@/data';
 
 export default defineComponent({
@@ -176,6 +177,9 @@ export default defineComponent({
 			}
 			else if(this.type === 'bishop'){
 				this.availableCells = bishopPattern(this.colour, this.pieceID, this.pieces)
+			}
+			else if(this.type === 'queen'){
+				this.availableCells = queenPattern(this.colour, this.pieceID, this.pieces)
 			}
 		},
 		selected(id: CellIDs){

@@ -1,4 +1,4 @@
-import { alphabet, checkCell, type BoardPiece, type CellIDs, type Piece } from "./data";
+import { alphabet, checkCell, type BoardPiece, type CellIDs } from "./data";
 
 export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPieces: BoardPiece): Array<CellIDs> {
 	const output: Array<CellIDs> = [];
@@ -11,11 +11,14 @@ export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPie
 	const index = parseInt(regExSplit[2]);
 
 	const offsets = [
+		[-3, -1], [-3, +1],
+		[0, -2], [0, +2],
+		[+3, -1], [+3, +1],
 		[-2, 0], [2, 0], 
 		[1, 1], [1, -1],
 		[-1, 1], [-1, -1]
-	];
-	  
+	]
+
 	for (const [offsetAlpha, offsetIndex] of offsets) {
 		let i = alpha + offsetAlpha;
 		let j = index + offsetIndex;
@@ -34,7 +37,6 @@ export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPie
 			j += offsetIndex;
 		}
 	}
-	  
-
+	
 	return output;
 }
