@@ -6,6 +6,7 @@ import { pattern as rookPattern } from '@/rook';
 import { pattern as knightPattern } from '@/knight';
 import { pattern as bishopPattern } from '@/bishop';
 import { pattern as queenPattern } from '@/queen';
+import { pattern as kingPattern } from '@/king';
 import { alphabet, type CellIDs, type Piece, type BoardPiece } from '@/data';
 
 export default defineComponent({
@@ -180,6 +181,9 @@ export default defineComponent({
 			}
 			else if(this.type === 'queen'){
 				this.availableCells = queenPattern(this.colour, this.pieceID, this.pieces)
+			}
+			else if(this.type === 'king'){
+				this.availableCells = kingPattern(this.colour, this.pieceID, this.pieces)
 			}
 		},
 		selected(id: CellIDs){
