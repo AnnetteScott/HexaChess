@@ -157,7 +157,11 @@ export default defineComponent({
     },
     methods: {
 		startMove(id: CellIDs, type: Piece, typeColour: 'white' | 'black'){
-			if(this.turn !== typeColour){
+			if(this.turn !== typeColour || this.pieceID === id){
+				this.pieceID = null;
+				this.type = null;
+				this.colour = null;
+				this.availableCells = []
 				return;
 			}
 			this.pieceID = id;
