@@ -10,100 +10,30 @@ export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPie
 	const alpha = alphabet.indexOf(regExSplit[1]);
 	const index = parseInt(regExSplit[2]);
 
-
-	const directions = { 'black': 1, 'white': -1 };
-
-	// Decreasing alpha
-	for(let i = alpha - 1; i >= 0; i--){
-		let cell = `${alphabet[i]}${index}` as CellIDs;
-		if(!checkCell(cell, team, boardPieces)){
-			output.push(cell)
-		}
-		else if(typeof checkCell(cell, team, boardPieces) === 'string'){
-			output.push(cell);
-			break;
-		}
-		else{ break; }
-	}
-	// Increasing alpha
-	for(let i = alpha + 1; i < 21; i++){
-		let cell = `${alphabet[i]}${index}` as CellIDs;
-		if(!checkCell(cell, team, boardPieces)){
-			output.push(cell)
-		}
-		else if(typeof checkCell(cell, team, boardPieces) === 'string'){
-			output.push(cell);
-			break;
-		}
-		else{ break; }
-	}
-	// Increasing alpha and Increasing index
-	let j = index + 1
-	for(let i = alpha + 1; i < 21; i++){
-		console.log(i, j)
-		let cell = `${alphabet[i]}${j}` as CellIDs;
-		console.log(cell)
-		if(!checkCell(cell, team, boardPieces)){
-			output.push(cell)
-		}
-		else if(typeof checkCell(cell, team, boardPieces) === 'string'){
-			output.push(cell);
-			break;
-		}
-		else{ break; }
-		j++;
-	}
-	// Increasing alpha and Decreasing index
-	j = index - 1
-	for(let i = alpha + 1; i < 21; i++){
-		let cell = `${alphabet[i]}${j}` as CellIDs;
-		console.log(cell)
-		if(!checkCell(cell, team, boardPieces)){
-			output.push(cell)
-		}
-		else if(typeof checkCell(cell, team, boardPieces) === 'string'){
-			output.push(cell);
-			break;
-		}
-		else{ break; }
-		j--;
-		if(j < 0){
-			break;
+	const offsets = [
+		[-2, 0], [2, 0], [1, 1], [1, -1],
+		[-1, 1], [-1, -1]
+	];
+	  
+	for (const [offsetAlpha, offsetIndex] of offsets) {
+		let i = alpha + offsetAlpha;
+		let j = index + offsetIndex;
+		
+		while (i >= 0 && i < 21 && j >= 0) {
+			const cell = `${alphabet[i]}${j}` as CellIDs;
+			if (!checkCell(cell, team, boardPieces)) {
+				output.push(cell);
+			} else if (typeof checkCell(cell, team, boardPieces) === 'string') {
+				output.push(cell);
+				break;
+			} else {
+				break;
+			}
+			i += offsetAlpha;
+			j += offsetIndex;
 		}
 	}
-	// Decreasing alpha and Increasing index
-	j = index + 1
-	for(let i = alpha - 1; i >= 0; i--){
-		let cell = `${alphabet[i]}${j}` as CellIDs;
-		console.log(cell)
-		if(!checkCell(cell, team, boardPieces)){
-			output.push(cell)
-		}
-		else if(typeof checkCell(cell, team, boardPieces) === 'string'){
-			output.push(cell);
-			break;
-		}
-		else{ break; }
-		j++;
-	}
-	// Decreasing alpha and Decreasing index
-	j = index - 1
-	for(let i = alpha - 1; i >= 0; i--){
-		let cell = `${alphabet[i]}${j}` as CellIDs;
-		console.log(cell)
-		if(!checkCell(cell, team, boardPieces)){
-			output.push(cell)
-		}
-		else if(typeof checkCell(cell, team, boardPieces) === 'string'){
-			output.push(cell);
-			break;
-		}
-		else{ break; }
-		j--;
-		if(j < 0){
-			break;
-		}
-	}
+	  
 
 	return output;
 }
