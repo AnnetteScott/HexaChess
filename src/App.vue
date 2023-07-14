@@ -149,7 +149,6 @@ export default defineComponent({
 			type: '' as Piece | null,
 			colour: '' as 'white' | 'black' | null,
 			availableCells: [] as CellIDs[],
-			passantCells: {} as {[cell in CellIDs]?: CellIDs},
 			turn: 'white' as 'white' | 'black'
 		};
     },
@@ -170,9 +169,7 @@ export default defineComponent({
 			this.availableCells = []
 
 			if(this.type === 'pawn'){
-				const result = pawnPattern(this.colour, this.pieceID, this.pieces);
-				this.availableCells = result.output
-				this.passantCells = result.passant
+				this.availableCells = pawnPattern(this.colour, this.pieceID, this.pieces)
 			}
 			else if(this.type === 'rook'){
 				this.availableCells = rookPattern(this.colour, this.pieceID, this.pieces)
@@ -205,11 +202,6 @@ export default defineComponent({
 			}
 
 			this.pieces[id] = {'colour': this.colour, 'moved': moved, 'type': this.type};
-
-			const passantCell = this.passantCells[id];
-			if(this.type === 'pawn' && passantCell){
-				delete this.pieces[passantCell]
-			}
 
 			this.pieceID = null;
 			this.type = null;

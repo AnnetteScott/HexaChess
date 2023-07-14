@@ -270,7 +270,7 @@ export default defineComponent({
 	padding: 8px;
 }
 .chessPiece > svg {
-	transform: scale(1.3);
+	transform: scale(1.5);
 	transform-origin: center;
 }
 </style>

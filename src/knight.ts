@@ -24,6 +24,9 @@ export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPie
 		if (!checkCell(cell, team, boardPieces)) {
 			output.push(cell);
 		}
+		else if (typeof checkCell(cell, team, boardPieces) === 'string') {
+			output.push(cell);
+		}
 	}
 	return output;
 }
