@@ -15,7 +15,7 @@ export default defineComponent({
 </script>
 
 <template>
-	<div class="chessPiece">
+	<div class="chessPiece" :class="`${colour}`">
 		<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="45" height="45">
 			<g v-if="colour === 'white'">
 				<g v-if="type === 'king'" style="fill:none; fill-opacity:1; fill-rule:evenodd; stroke:#000000; stroke-width:1.5; stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4; stroke-dasharray:none; stroke-opacity:1;" transform="translate(0,0)">
@@ -267,10 +267,20 @@ export default defineComponent({
 .chessPiece {
 	display: grid;
 	place-items: center;
-	padding: 8px;
+	padding: 15px;
+	border-radius: 50%;
 }
 .chessPiece > svg {
 	transform: scale(1.5);
 	transform-origin: center;
+	filter: drop-shadow(0 0 5px #0006);
+}
+
+.white{
+	background-color: #ffffff;
+}
+
+.black{
+	background-color: #000000;
 }
 </style>
