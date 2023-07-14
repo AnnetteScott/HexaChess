@@ -156,7 +156,7 @@ export default defineComponent({
 						:colour="info.colour" 
 						:id="id" 
 						:style="{ 'grid-area': info.grid }"
-						:pClass="pieaces[id].shape"
+						:shape="pieaces[id].shape"
 						:pColour="pieaces[id].colour"
 					/>
 				</template>
