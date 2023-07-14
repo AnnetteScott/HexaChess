@@ -10,55 +10,20 @@ export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPie
 	const alpha = alphabet.indexOf(regExSplit[1]);
 	const index = parseInt(regExSplit[2]);
 
-
-
-	let cell = `${alphabet[alpha - 5]}${index + 1}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha - 5]}${index - 1}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha - 4]}${index + 2}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha - 4]}${index - 2}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha - 1]}${index + 3}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha - 1]}${index - 3}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha + 1]}${index + 3}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha + 1]}${index - 3}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha + 4]}${index + 2}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha + 4]}${index - 2}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha + 5]}${index + 1}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
-	}
-	cell = `${alphabet[alpha + 5]}${index - 1}` as CellIDs;
-	if (!checkCell(cell, team, boardPieces)) {
-		output.push(cell);
+	const offsets = [
+		[-5, 1], [-5, -1],
+		[-4, 2], [-4, -2],
+		[-1, 3], [-1, -3],
+		[1, 3], [1, -3],
+		[4, 2], [4, -2],
+		[5, 1], [5, -1]
+	];
+	
+	for (const [offsetAlpha, offsetIndex] of offsets) {
+		const cell = `${alphabet[alpha + offsetAlpha]}${index + offsetIndex}` as CellIDs;
+		if (!checkCell(cell, team, boardPieces)) {
+			output.push(cell);
+		}
 	}
 	return output;
 }
