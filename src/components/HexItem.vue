@@ -4,6 +4,7 @@ import ChessPiece from './ChessPiece.vue';
 
 export default defineComponent({
 	name: 'HexItem',
+	emits: ['clicked'],
 	props: {
 		colour: {
 			type: String,
@@ -14,25 +15,31 @@ export default defineComponent({
 			type: String,
 			required: true
 		},
+		highlight: {
+			type: Boolean,
+			default: true,
+			required: true
+		},
 		pColour: {
 			type: String as PropType<'black' | 'white'>,
 			required: false
 		},
-		shape: {
+		type: {
 			type: String,
 			required: false
 		},
 	},
 	components: {
 		ChessPiece
-	}
+	},
 })
 
 </script>
 
 <template>
-	<div :id="id" class="hexagon" :style="{'color': colour}">
-		<ChessPiece v-if="shape" :colour="pColour" :type="shape" style="z-index: 1;" />
+	<div :id="id" :class="{hexagon: true }" :style="{'color': colour}" @click="$emit('clicked')">
+		<ChessPiece v-if="type" :colour="pColour" :type="type" style="z-index: 3;" />
+		<div :class="{smallHexagon: highlight }"></div>
 	</div>
 </template>
 
@@ -69,4 +76,42 @@ export default defineComponent({
 	border-left: 25px solid currentColor;
 	border-bottom: 45px solid transparent;
 }
+
+.smallHexagon {
+	position: absolute;
+	z-index: 1;
+	display: grid;
+	place-content: center;
+	place-items: center;
+	width: 49px;
+	height: 80px;
+	color: #ff00005d;
+	background-color: currentColor;
+}
+.smallHexagon:before {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	left: -22px;
+	width: 0;
+	height: 0;
+	color: inherit;
+	border-top: 40px solid transparent;
+	border-right: 22px solid currentColor;
+	border-bottom: 40px solid transparent;
+}
+.smallHexagon:after {
+	content: "";
+	position: absolute;
+	z-index: 0;
+	right: -22px;
+	width: 0;
+	height: 0;
+	color: inherit;
+	border-top: 40px solid transparent;
+	border-left: 22px solid currentColor;
+	border-bottom: 40px solid transparent;
+}
+
+
 </style>
