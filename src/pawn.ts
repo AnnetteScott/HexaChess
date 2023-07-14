@@ -1,6 +1,5 @@
-import type { BoardPiece, CellIDs, Piece } from "./data";
+import { alphabet, checkCell, type BoardPiece, type CellIDs, type Piece } from "./data";
 
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U'];
 export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPieces: BoardPiece): {output: Array<CellIDs>, passant: {[cell in CellIDs]?: CellIDs}} {
 	const output: Array<CellIDs> = [];
 
@@ -34,17 +33,4 @@ export function pattern (team: 'black' | 'white', currentTile: CellIDs, boardPie
 	}
 
 	return {output, passant: {[cell]: passantCell1, [cell1]: passantCell2}};
-}
-
-function checkCell(cellID: CellIDs, colour: 'white' | 'black', boardPieces: BoardPiece): Piece | boolean{
-	if(Object.keys(boardPieces).includes(cellID)){
-		if(boardPieces[cellID].colour === colour){
-			// Same colour piece in cell
-			return true;
-		}
-		// Enemy piece in cell
-		return boardPieces[cellID].type
-	}
-	// No piece in cell
-	return false;
 }

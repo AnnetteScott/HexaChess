@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue';
 import HexItem from './components/HexItem.vue';
 import { pattern as pawnPattern } from '@/pawn';
+import { pattern as rookPattern } from '@/rook';
 import { alphabet, type CellIDs, type Piece, type BoardPiece } from '@/data';
 
 export default defineComponent({
@@ -166,7 +167,7 @@ export default defineComponent({
 				this.passantCells = result.passant
 			}
 			else if(this.type === 'rook'){
-
+				this.availableCells = rookPattern(this.colour, this.pieceID, this.pieces)
 			}
 		},
 		selected(id: CellIDs){
